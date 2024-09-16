@@ -16,6 +16,7 @@ function App() {
   const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
+  const [disabled, setDisabled] = useState(false);
 
   const shuffleCards = () => {
     const shuffledCards = [...cardImages, ...cardImages]
@@ -42,7 +43,6 @@ function App() {
     }
   };
 
-  // compare 2 selected cards
   useEffect(() => {
     if (choiceOne && choiceTwo) {
       setDisabled(true);
@@ -63,7 +63,6 @@ function App() {
       resetTurn();
     }, 1000);
 
-    // cleanup function
     return () => {
       clearTimeout(timerId);
     };
@@ -84,6 +83,8 @@ function App() {
             key={card.id}
             card={card}
             handleChoice={handleChoice}
+            flipped={card === choiceOne || card === choiceTwo || card.matched}
+            disabled={disabled}
           />
         ))}
         <p>Количество ходов: {turns}</p>
