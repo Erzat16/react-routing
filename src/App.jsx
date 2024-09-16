@@ -30,7 +30,9 @@ function App() {
   };
 
   const handleChoice = (card) => {
+    if (choiceOne?.id === card.id) return;
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
+
   };
 
   const resetTurn = () => {
